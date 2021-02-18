@@ -30,4 +30,12 @@ public class UserController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+
+	
+	@PostMapping("/login")
+	public ResponseEntity<UserDTO> login(@RequestBody UserDTO userDTO){
+		// Created only to retrieve the Bearer token once authenticated
+		return ResponseEntity.status(HttpStatus.OK).body(userDTO);
+	}
 }

@@ -1,5 +1,7 @@
 package com.jacaranda.security.services;
 
+import javax.naming.AuthenticationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,6 +30,10 @@ public class UserService implements UserDetailsService {
 		.orElseThrow(()-> new UsernameNotFoundException("Username not found"));
 	}
 	
+	public UserDetails loadUserById(Long idUser) throws AuthenticationException {
+		return userRepository.findById(idUser)
+				.orElseThrow(()-> new AuthenticationException("Id/username not found"));
+	}	
 	
 	public User createUser (UserDTO dto) {
 		
